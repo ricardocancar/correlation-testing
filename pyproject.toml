@@ -1,10 +1,4 @@
 [project]
-name = "inicadores"
-version = "0.1.0"
-description = "Add your description here"
-
-readme = "README.md"
-requires-python = ">=3.11"
 dependencies = [
     "yfinance",
     "pandas",
@@ -12,4 +6,8 @@ dependencies = [
     "pandas-datareader",
 ]
 [tool.poetry]
-package-mode = false
+name = "inicadores"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+package-mode = false  # <--- Add this line

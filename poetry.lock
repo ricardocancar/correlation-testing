@@ -1,0 +1,15 @@
+[[package]]
+name = "dependencies"
+version = "7.7.1"
+description = "Constructor injection designed with OOP in mind."
+category = "main"
+optional = false
+python-versions = "*"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.11"
+content-hash = "231ce9d091a93e75a4781e5bcb10377f937f3d05a5a11809a22b117a08e9f85a"
+
+[metadata.files]
+dependencies = []
