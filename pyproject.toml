@@ -8,8 +8,6 @@ requires-python = ">=3.11"
 dependencies = [
     "yfinance",
     "pandas",
-    "numpy",
-    "arch",
     "streamlit>=1.55.0",
     "pandas-datareader",
 ]
