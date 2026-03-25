@@ -1,13 +1,18 @@
-[project]
-dependencies = [
-    "yfinance",
-    "pandas",
-    "streamlit>=1.55.0",
-    "pandas-datareader",
-]
 [tool.poetry]
 name = "inicadores"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
-package-mode = false  # <--- Add this line
+description = "Correlation testing app"
+authors = ["ricardocancar@mail.com"]
+readme = "README.md"
+packages = []  # <--- This is the key to fixing the "No file/folder found" error
+
+[tool.poetry.dependencies]
+python = "^3.11"
+streamlit = "1.55.0"
+pandas = "2.3.3"
+numpy = "2.4.3"
+pandas-datareader = "0.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
