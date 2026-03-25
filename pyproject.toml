@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Correlation testing app"
 authors = ["ricardocancar@mail.com"]
 readme = "README.md"
-packages = []  # <--- This is the key to fixing the "No file/folder found" error
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
