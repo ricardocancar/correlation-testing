@@ -4,8 +4,8 @@ version = "0.1.0"
 description = "Correlation testing app"
 authors = ["ricardocancar@mail.com"]
 readme = "README.md"
-package-mode = false
-# packages = []
+# package-mode = false
+packages = []
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.13"

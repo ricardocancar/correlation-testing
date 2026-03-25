@@ -291,7 +291,10 @@ optional = false
 python-versions = ">=3.9"
 
 [package.dependencies]
-numpy = {version = ">=1.23.2", markers = "python_version == \"3.11\""}
+numpy = [
+    {version = ">=1.23.2", markers = "python_version == \"3.11\""},
+    {version = ">=1.26.0", markers = "python_version >= \"3.12\""},
+]
 python-dateutil = ">=2.8.2"
 pytz = ">=2020.1"
 tzdata = ">=2022.7"
@@ -641,8 +644,8 @@ repair = ["scipy (>=1.6.3)"]
 
 [metadata]
 lock-version = "1.1"
-python-versions = "3.11"
-content-hash = "a322298a55ac2bc29d8af8b623f541983a740cac7cc9a0aaa40b0fc29d5b9fea"
+python-versions = ">=3.11,<3.13"
+content-hash = "13ae1b8f317bd76b41eec5023b64c72d836679207bfa9f5f5318a152a941b669"
 
 [metadata.files]
 altair = []
