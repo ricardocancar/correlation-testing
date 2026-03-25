@@ -28,6 +28,25 @@ optional = false
 python-versions = ">=3.9"
 
 [[package]]
+name = "beautifulsoup4"
+version = "4.14.3"
+description = "Screen-scraping library"
+category = "main"
+optional = false
+python-versions = ">=3.7.0"
+
+[package.dependencies]
+soupsieve = ">=1.6.1"
+typing-extensions = ">=4.0.0"
+
+[package.extras]
+cchardet = ["cchardet"]
+chardet = ["chardet"]
+charset-normalizer = ["charset-normalizer"]
+html5lib = ["html5lib"]
+lxml = ["lxml"]
+
+[[package]]
 name = "blinker"
 version = "1.9.0"
 description = "Fast, simple object-to-object and broadcast signaling"
@@ -50,6 +69,17 @@ description = "Python package for providing Mozilla's CA Bundle."
 category = "main"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "cffi"
+version = "2.0.0"
+description = "Foreign Function Interface for Python calling C code."
+category = "main"
+optional = false
+python-versions = ">=3.9"
+
+[package.dependencies]
+pycparser = {version = "*", markers = "implementation_name != \"PyPy\""}
 
 [[package]]
 name = "charset-normalizer"
@@ -77,6 +107,32 @@ description = "Cross-platform colored terminal text."
 category = "main"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+
+[[package]]
+name = "curl-cffi"
+version = "0.13.0"
+description = "libcurl ffi bindings for Python, with impersonation support."
+category = "main"
+optional = false
+python-versions = ">=3.9"
+
+[package.dependencies]
+certifi = ">=2024.2.2"
+cffi = ">=1.12.0"
+
+[package.extras]
+extra = ["readability-lxml (>=0.8.1)", "markdownify (>=1.1.0)", "lxml-html-clean"]
+dev = ["charset_normalizer (>=3.3.2,<4.0)", "coverage (>=6.4.1,<7.0)", "cryptography (>=42.0.5,<43.0)", "httpx (==0.23.1)", "mypy (>=1.9.0,<2.0)", "pytest (>=8.1.1,<9.0)", "pytest-asyncio (>=0.23.6,<1.0)", "pytest-trio (>=0.8.0,<1.0)", "ruff (>=0.3.5,<1.0)", "trio (>=0.25.0,<1.0)", "trustme (>=1.1.0,<2.0)", "uvicorn (>=0.29.0,<1.0)", "websockets (>=12.0,<13.0)", "typing-extensions"]
+build = ["cibuildwheel", "wheel"]
+test = ["charset_normalizer (>=3.3.2,<4.0)", "cryptography (>=42.0.5,<43.0)", "fastapi (==0.110.0)", "httpx (==0.23.1)", "proxy.py (>=2.4.3,<3.0)", "pytest (>=8.1.1,<9.0)", "pytest-asyncio (>=0.23.6,<1.0)", "pytest-trio (>=0.8.0,<1.0)", "python-multipart (>=0.0.9,<1.0)", "trio (>=0.25.0,<1.0)", "trustme (>=1.1.0,<2.0)", "uvicorn (>=0.29.0,<1.0)", "websockets (>=12.0,<13.0)", "typing-extensions"]
+
+[[package]]
+name = "frozendict"
+version = "2.4.7"
+description = "A simple immutable dictionary"
+category = "main"
+optional = false
+python-versions = ">=3.6"
 
 [[package]]
 name = "gitdb"
@@ -181,6 +237,14 @@ optional = false
 python-versions = ">=3.9"
 
 [[package]]
+name = "multitasking"
+version = "0.0.12"
+description = "Non-blocking Python methods using decorators"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "narwhals"
 version = "2.18.1"
 description = "Extremely lightweight compatibility layer between dataframe libraries"
@@ -274,6 +338,23 @@ pandas = ">=0.23"
 requests = ">=2.19.0"
 
 [[package]]
+name = "peewee"
+version = "4.0.2"
+description = "a little orm"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+mysql = ["pymysql"]
+postgres = ["psycopg2-binary"]
+psycopg3 = ["psycopg"]
+cysqlite = ["cysqlite"]
+aiosqlite = ["aiosqlite", "greenlet"]
+aiomysql = ["aiomysql", "greenlet"]
+asyncpg = ["asyncpg", "greenlet"]
+
+[[package]]
 name = "pillow"
 version = "12.1.1"
 description = "Python Imaging Library (fork)"
@@ -290,6 +371,14 @@ tests = ["check-manifest", "coverage (>=7.4.2)", "defusedxml", "markdown2", "ole
 xmp = ["defusedxml"]
 
 [[package]]
+name = "platformdirs"
+version = "4.9.4"
+description = "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`."
+category = "main"
+optional = false
+python-versions = ">=3.10"
+
+[[package]]
 name = "protobuf"
 version = "6.33.6"
 description = ""
@@ -301,6 +390,14 @@ python-versions = ">=3.9"
 name = "pyarrow"
 version = "23.0.1"
 description = "Python library for Apache Arrow"
+category = "main"
+optional = false
+python-versions = ">=3.10"
+
+[[package]]
+name = "pycparser"
+version = "3.0"
+description = "C parser in Python"
 category = "main"
 optional = false
 python-versions = ">=3.10"
@@ -395,6 +492,14 @@ description = "A pure Python implementation of a sliding window memory map manag
 category = "main"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "soupsieve"
+version = "2.8.3"
+description = "A modern CSS selector implementation for Beautiful Soup."
+category = "main"
+optional = false
+python-versions = ">=3.9"
 
 [[package]]
 name = "streamlit"
@@ -503,20 +608,58 @@ python-versions = ">=3.9"
 [package.extras]
 watchmedo = ["PyYAML (>=3.10)"]
 
+[[package]]
+name = "websockets"
+version = "16.0"
+description = "An implementation of the WebSocket Protocol (RFC 6455 & 7692)"
+category = "main"
+optional = false
+python-versions = ">=3.10"
+
+[[package]]
+name = "yfinance"
+version = "1.2.0"
+description = "Download market data from Yahoo! Finance API"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+beautifulsoup4 = ">=4.11.1"
+curl_cffi = ">=0.7,<0.14"
+frozendict = ">=2.3.4"
+multitasking = ">=0.0.7"
+numpy = ">=1.16.5"
+pandas = ">=1.3.0"
+peewee = ">=3.16.2"
+platformdirs = ">=2.0.0"
+protobuf = ">=3.19.0"
+pytz = ">=2022.5"
+requests = ">=2.31"
+websockets = ">=13.0"
+
+[package.extras]
+nospam = ["requests_cache (>=1.0)", "requests_ratelimiter (>=0.3.1)"]
+repair = ["scipy (>=1.6.3)"]
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.11"
-content-hash = "5300158520c48be266658f847653ac3eba38f78ce3d4e5a12864a899bb1c356c"
+content-hash = "e98971e49053bd47332dc76f9aa0dbf92cfbaaf1209ad41cb6f92dd3f02a06c2"
 
 [metadata.files]
 altair = []
 attrs = []
+beautifulsoup4 = []
 blinker = []
 cachetools = []
 certifi = []
+cffi = []
 charset-normalizer = []
 click = []
 colorama = []
+curl-cffi = []
+frozendict = []
 gitdb = []
 gitpython = []
 idna = []
@@ -525,14 +668,18 @@ jsonschema = []
 jsonschema-specifications = []
 lxml = []
 markupsafe = []
+multitasking = []
 narwhals = []
 numpy = []
 packaging = []
 pandas = []
 pandas-datareader = []
+peewee = []
 pillow = []
+platformdirs = []
 protobuf = []
 pyarrow = []
+pycparser = []
 pydeck = []
 python-dateutil = []
 pytz = []
@@ -541,6 +688,7 @@ requests = []
 rpds-py = []
 six = []
 smmap = []
+soupsieve = []
 streamlit = []
 tenacity = []
 toml = []
@@ -549,3 +697,5 @@ typing-extensions = []
 tzdata = []
 urllib3 = []
 watchdog = []
+websockets = []
+yfinance = []
