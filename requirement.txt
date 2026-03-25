@@ -1,0 +1,8 @@
+yfinance
+pandas
+numpy
+matplotlib
+arch
+scipy
+streamlit==1.55.0
+plotly==6.6.0
