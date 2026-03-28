@@ -628,8 +628,8 @@ repair = ["scipy (>=1.6.3)"]
 
 [metadata]
 lock-version = "1.1"
-python-versions = ">=3.11,<3.13"
-content-hash = "7ed1679857e654582217abbd6d610f815abaef59a911c246ead1ea56fcc4bd56"
+python-versions = "^3.11"
+content-hash = "37d19a831ca840a9fcd518928240afac95765876674248c4fa379e28f56580e9"
 
 [metadata.files]
 altair = []
