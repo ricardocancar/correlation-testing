@@ -13,7 +13,7 @@ streamlit = "1.55.0"
 pandas = "2.3.3"
 numpy = "2.4.3"
 yfinance = "1.2.0"
-pandas-datareader = "0.10.0"
+fredapi = "0.5.2"
 
 [build-system]
 requires = ["poetry-core"]
