@@ -4,14 +4,17 @@ from fredapi import Fred
 import pandas as pd
 import datetime
 
-def analizar_macro_mensual(start_hist, start_recent, end_date, fred_api_key):
-    # Descargar Oro y agrupar por mes
+# ============= FUNCIONES CON CACHE PARA DATOS HISTÓRICOS =============
+
+@st.cache_data(ttl=86400)  # Cache por 24 horas (86400 segundos)
+def descargar_oro_historico(start_hist, end_date):
+    """Descargar datos históricos de oro (cambian solo diariamente)"""
     oro = yf.download('GC=F', start=start_hist, end=end_date)['Close']
-    oro_mensual = oro.resample('ME').last()
-    
-    # Descargar M2 (Mensual) y Deuda Pública Total (Trimestral) de la FRED
-    # M2SL: M2 Money Supply
-    # GFDEBTN: Federal Debt: Total Public Debt (Trimestral)
+    return oro.resample('ME').last()
+
+@st.cache_data(ttl=86400)  # Cache por 24 horas
+def descargar_datos_fred(start_hist, end_date, fredapi_key):
+    """Descargar datos históricos de FRED (cambian solo mensuamente)"""
     tickers_fred = {
         'M2SL': 'M2', 
         'GFDEBTN': 'Deuda_Publica', 
@@ -20,14 +23,28 @@ def analizar_macro_mensual(start_hist, start_recent, end_date, fred_api_key):
         'FEDFUNDS': 'Tasa_Fed'
     }
     
-    # Usar FRED API para descargar datos
-    fred = Fred(api_key=fred_api_key)
+    fred = Fred(api_key=fredapi_key)
     macro_data = {}
     for ticker, name in tickers_fred.items():
         macro_data[name] = fred.get_series(ticker, start_date=start_hist, end_date=end_date)
     
     macro = pd.DataFrame(macro_data)
     macro.index = pd.to_datetime(macro.index)
+    return macro
+
+@st.cache_data(ttl=86400)  # Cache por 24 horas
+def descargar_mercado_historico(start_hist, end_date):
+    """Descargar datos históricos de mercado (cambian solo diariamente)"""
+    tickers_mercado = ['GC=F', 'DX-Y.NYB', '^TNX']
+    df_diario = yf.download(tickers_mercado, start=start_hist, end=end_date)['Close']
+    return df_diario
+
+# ============= FUNCIONES DE ANÁLISIS SIN CACHE =============
+
+def analizar_macro_mensual(start_hist, start_recent, end_date, fred_api_key):
+    # Descargar datos históricos usando funciones cacheadas
+    oro_mensual = descargar_oro_historico(start_hist, end_date)
+    macro = descargar_datos_fred(start_hist, end_date, fred_api_key)
     
     # Agrupar los datos macro a fin de mes y aplicar Forward Fill
     # Esto rellena los meses vacíos de la Deuda Pública con el último dato trimestral publicado
@@ -57,16 +74,16 @@ def analizar_macro_mensual(start_hist, start_recent, end_date, fred_api_key):
     return tabla_macro, df_macro.iloc[-1]['Oro']
 
 def analizar_mercado_frecuencias(start_hist, end_date):
-    tickers_mercado = ['GC=F', 'DX-Y.NYB', '^TNX']
     nombres = {'GC=F': 'Oro', 'DX-Y.NYB': 'DXY', '^TNX': 'US10Y'}
 
-    # A. Análisis Diario (Histórico 2005 - 2025)
-    df_diario = yf.download(tickers_mercado, start=start_hist, end=end_date)['Close']
+    # A. Análisis Diario (Histórico 2005 - 2025) - Usa cache
+    df_diario = descargar_mercado_historico(start_hist, end_date)
     df_diario.rename(columns=nombres, inplace=True)
     corr_diaria = df_diario.pct_change().corr()['Oro'].drop('Oro')
 
-    # B. Análisis Intradía (Última hora, frecuencia de 1 minuto)
+    # B. Análisis Intradía (Última hora, frecuencia de 1 minuto) - SIN CACHE (siempre datos frescos)
     # yfinance permite bajar datos de 1 minuto del último día cotizado ('1d')
+    tickers_mercado = ['GC=F', 'DX-Y.NYB', '^TNX']
     df_minuto = yf.download(tickers_mercado, period='1d', interval='1m')['Close']
     df_minuto.rename(columns=nombres, inplace=True)
     
